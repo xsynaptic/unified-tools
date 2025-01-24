@@ -1,77 +1,77 @@
 {
-	"name": "@xsynaptic/unified-tools",
-	"version": "0.0.1",
-	"description": "Unified ecosystem tools for personal use",
-	"exports": {
-		".": {
-			"import": {
-				"types": "./dist/index.d.ts",
-				"default": "./dist/index.js"
-			},
-			"require": {
-				"types": "./dist/index.d.cts",
-				"default": "./dist/index.cjs"
-			}
-		}
-	},
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"sideEffects": false,
-	"files": [
-		"dist/**/*",
-		"src/**/*"
-	],
-	"type": "module",
-	"scripts": {
-		"build": "tsup",
-		"build-tsc": "tsc --build",
-		"check-types": "tsc --project tsconfig.json --noemit",
-		"lint": "eslint",
-		"test": "vitest",
-		"prepublish": "npm run build"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/xsynaptic/unified-tools.git"
-	},
-	"keywords": [
-		"unified",
-		"rehype",
-		"rehype-plugin",
-		"remark",
-		"remark-plugin"
-	],
-	"author": "Alexander Synaptic <x@synapticism.com>",
-	"bugs": {
-		"url": "https://github.com/xsynaptic/unified-tools/issues"
-	},
-	"homepage": "https://github.com/xsynaptic/unified-tools#readme",
-	"license": "MIT",
-	"dependencies": {
-		"rehype-parse": "^9.0.1",
-		"rehype-sanitize": "^6.0.0",
-		"rehype-stringify": "^10.0.1",
-		"rehype-wrap-cjk": "^0.2.3",
-		"remark-parse": "^11.0.0",
-		"remark-rehype": "^11.1.1",
-		"remark-smartypants": "^3.0.2",
-		"retext": "^9.0.0",
-		"retext-smartypants": "^6.2.0",
-		"unified": "^11.0.5"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.18.0",
-		"@types/eslint__js": "^8.42.3",
-		"@types/jest": "^29.5.14",
-		"eslint": "^9.18.0",
-		"eslint-plugin-simple-import-sort": "^12.1.1",
-		"eslint-plugin-unicorn": "^56.0.1",
-		"globals": "^15.14.0",
-		"prettier": "^3.4.2",
-		"tsup": "^8.3.5",
-		"typescript": "^5.7.3",
-		"typescript-eslint": "^8.21.0",
-		"vitest": "^3.0.2"
-	},
-	"packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
+  "name": "@xsynaptic/unified-tools",
+  "version": "0.0.1",
+  "description": "A common set of tools for transforming and manipulating markup and text",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "build-tsc": "tsc --build",
+    "check-types": "tsc --project tsconfig.json --noemit",
+    "lint": "eslint",
+    "test": "vitest",
+    "prepublishOnly": "pnpm build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xsynaptic/unified-tools.git"
+  },
+  "keywords": [
+    "unified",
+    "rehype",
+    "rehype-plugin",
+    "remark",
+    "remark-plugin"
+  ],
+  "author": "Alexander Synaptic <x@synapticism.com>",
+  "bugs": {
+    "url": "https://github.com/xsynaptic/unified-tools/issues"
+  },
+  "homepage": "https://github.com/xsynaptic/unified-tools#readme",
+  "license": "MIT",
+  "dependencies": {
+    "rehype-parse": "^9.0.1",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "rehype-wrap-cjk": "^0.2.3",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.1",
+    "remark-smartypants": "^3.0.2",
+    "retext": "^9.0.0",
+    "retext-smartypants": "^6.2.0",
+    "unified": "^11.0.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/jest": "^29.5.14",
+    "eslint": "^9.18.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unicorn": "^56.0.1",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.21.0",
+    "vitest": "^3.0.2"
+  },
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
