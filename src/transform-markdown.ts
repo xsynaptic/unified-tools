@@ -6,7 +6,7 @@ import remarkRehype from 'remark-rehype';
 import remarkSmartyPants from 'remark-smartypants';
 import { unified } from 'unified';
 
-export function transformMarkdown(input: string): string {
+export function transformMarkdown(input: string) {
   const output = unified()
     .use(remarkParse)
     .use(remarkSmartyPants)

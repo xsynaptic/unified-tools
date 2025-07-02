@@ -4,7 +4,7 @@ import rehypeStringify from 'rehype-stringify';
 import rehypeWrapCjk from 'rehype-wrap-cjk';
 import { unified } from 'unified';
 
-export function wrapCjk(input: string): string {
+export function wrapCjk(input: string) {
   const output = unified()
     .use(rehypeParse, { fragment: true })
     .use(rehypeWrapCjk)

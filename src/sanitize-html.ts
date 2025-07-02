@@ -5,10 +5,7 @@ import { unified } from 'unified';
 
 import type { Options as RehypeSanitizeOptions } from 'rehype-sanitize';
 
-export function sanitizeHtml(
-  input: string,
-  options?: RehypeSanitizeOptions
-): string {
+export function sanitizeHtml(input: string, options?: RehypeSanitizeOptions) {
   const output = unified()
     .use(rehypeParse, { fragment: true })
     .use(rehypeSanitize, options)
@@ -19,7 +16,5 @@ export function sanitizeHtml(
 }
 
 // Handy shortcut for when you just want to strip tags from text
-export const stripTags = (
-  input: string,
-  options?: RehypeSanitizeOptions
-): string => sanitizeHtml(input, { ...options, tagNames: [] });
+export const stripTags = (input: string, options?: RehypeSanitizeOptions) =>
+  sanitizeHtml(input, { ...options, tagNames: [] });
