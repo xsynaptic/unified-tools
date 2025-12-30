@@ -1,21 +1,15 @@
 {
   "name": "@xsynaptic/unified-tools",
-  "version": "0.0.8",
+  "version": "2.0.0",
   "description": "A common set of tools for transforming and manipulating markup and text",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "sideEffects": false,
   "files": [
     "dist/**/*",
@@ -23,7 +17,7 @@
   ],
   "type": "module",
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "build-tsc": "tsc --build",
     "check-types": "tsc --project tsconfig.json --noemit",
     "lint": "eslint",
@@ -51,7 +45,8 @@
     "rehype-parse": "^9.0.1",
     "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "^10.0.1",
-    "rehype-wrap-cjk": "^0.3.0",
+    "rehype-wrap-cjk": "^1.0.5",
+    "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "remark-smartypants": "^3.0.2",
@@ -60,17 +55,17 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
-    "@eslint/js": "^9.32.0",
+    "@eslint/js": "^9.39.2",
     "@types/jest": "^30.0.0",
-    "eslint": "^9.32.0",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-unicorn": "^60.0.0",
-    "globals": "^16.3.0",
-    "prettier": "^3.6.2",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0",
-    "vitest": "^3.2.4"
+    "eslint": "^9.39.2",
+    "eslint-plugin-perfectionist": "^5.1.0",
+    "eslint-plugin-unicorn": "^62.0.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.7.4",
+    "tsdown": "^0.18.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.51.0",
+    "vitest": "^4.0.16"
   },
-  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+  "packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }
