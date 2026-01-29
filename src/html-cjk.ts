@@ -1,39 +1,64 @@
 import type { RehypeWrapCjkOptions } from 'rehype-wrap-cjk';
 
+import { hash } from 'ohash';
 import rehypeParse from 'rehype-parse';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import { rehypeWrapCjk } from 'rehype-wrap-cjk';
 import { unified } from 'unified';
 
-export function wrapChinese(input: string): string {
-  const processor = unified()
-    .use(rehypeParse, { fragment: true })
-    .use(rehypeWrapCjk, { langCode: 'zh' })
-    .use(rehypeSanitize)
-    .use(rehypeStringify);
+// Cache frozen processors by options hash
+const processorCache = new Map<string, unknown>();
 
-  return processor.processSync(input).toString();
+// Processor with CJK wrapping
+function createProcessorWithCjk(wrapCjkOptions: Partial<RehypeWrapCjkOptions>) {
+  return unified()
+    .use(rehypeParse, { fragment: true })
+    .use(rehypeWrapCjk, wrapCjkOptions)
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .freeze();
+}
+
+// Processor without CJK wrapping
+function createProcessorWithoutCjk() {
+  return unified()
+    .use(rehypeParse, { fragment: true })
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+    .freeze();
+}
+
+function getProcessor(wrapCjkOptions?: Partial<RehypeWrapCjkOptions>) {
+  const cacheKey = wrapCjkOptions ? hash(wrapCjkOptions) : '';
+
+  let processor = processorCache.get(cacheKey);
+
+  if (!processor) {
+    processor = wrapCjkOptions
+      ? createProcessorWithCjk(wrapCjkOptions)
+      : createProcessorWithoutCjk();
+    processorCache.set(cacheKey, processor);
+  }
+
+  return processor as ReturnType<typeof createProcessorWithoutCjk>;
+}
+
+// Pre-defined options for common language codes
+const zhOptions: Partial<RehypeWrapCjkOptions> = { langCode: 'zh' };
+const jaOptions: Partial<RehypeWrapCjkOptions> = { langCode: 'ja' };
+const koOptions: Partial<RehypeWrapCjkOptions> = { langCode: 'ko' };
+
+export function wrapChinese(input: string): string {
+  return getProcessor(zhOptions).processSync(input).toString();
 }
 
 export function wrapJapanese(input: string): string {
-  const processor = unified()
-    .use(rehypeParse, { fragment: true })
-    .use(rehypeWrapCjk, { langCode: 'ja' })
-    .use(rehypeSanitize)
-    .use(rehypeStringify);
-
-  return processor.processSync(input).toString();
+  return getProcessor(jaOptions).processSync(input).toString();
 }
 
 export function wrapKorean(input: string): string {
-  const processor = unified()
-    .use(rehypeParse, { fragment: true })
-    .use(rehypeWrapCjk, { langCode: 'ko' })
-    .use(rehypeSanitize)
-    .use(rehypeStringify);
-
-  return processor.processSync(input).toString();
+  return getProcessor(koOptions).processSync(input).toString();
 }
 
 export function wrapCjk({
@@ -43,11 +68,5 @@ export function wrapCjk({
   input: string;
   wrapCjkOptions?: Partial<RehypeWrapCjkOptions>;
 }): string {
-  const processor = unified().use(rehypeParse, { fragment: true });
-
-  if (wrapCjkOptions) processor.use(rehypeWrapCjk, wrapCjkOptions);
-
-  processor.use(rehypeSanitize).use(rehypeStringify);
-
-  return processor.processSync(input).toString();
+  return getProcessor(wrapCjkOptions).processSync(input).toString();
 }

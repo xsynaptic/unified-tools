@@ -1,10 +1,32 @@
 import type { Options as RetextSmartypantsOptions } from 'retext-smartypants';
 
+import { hash } from 'ohash';
 import { retext } from 'retext';
 import retextSmartypants from 'retext-smartypants';
 
-export function stylizeText(input: string, options?: RetextSmartypantsOptions): string {
-	const processor = retext().use(retextSmartypants, options).processSync(input);
+// Cache frozen processors by options hash
+const processorCache = new Map<string, unknown>();
 
-	return String(processor).trim();
+function createProcessor(options?: RetextSmartypantsOptions) {
+  return retext().use(retextSmartypants, options).freeze();
+}
+
+function getProcessor(options?: RetextSmartypantsOptions) {
+  const cacheKey = options ? hash(options) : '';
+
+  let processor = processorCache.get(cacheKey);
+
+  if (!processor) {
+    processor = createProcessor(options);
+    processorCache.set(cacheKey, processor);
+  }
+
+  return processor as ReturnType<typeof createProcessor>;
+}
+
+export function stylizeText(
+  input: string,
+  options?: RetextSmartypantsOptions
+): string {
+  return String(getProcessor(options).processSync(input)).trim();
 }

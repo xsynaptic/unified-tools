@@ -1,5 +1,10 @@
 {
   "cSpell.words": [
+		"ohash",
+		"rehype",
+		"remark",
+		"retext",
+		"unified",
     "xsynaptic"
   ],
   "cSpell.ignorePaths": [".vscode", "pnpm*.yaml", "node_modules", "tsconfig.json"],
