@@ -45,9 +45,18 @@ function getProcessor(wrapCjkOptions?: Partial<RehypeWrapCjkOptions>) {
 }
 
 // Pre-defined options for common language codes
-const zhOptions: Partial<RehypeWrapCjkOptions> = { langCode: 'zh' };
-const jaOptions: Partial<RehypeWrapCjkOptions> = { langCode: 'ja' };
-const koOptions: Partial<RehypeWrapCjkOptions> = { langCode: 'ko' };
+const zhOptions: Partial<RehypeWrapCjkOptions> = {
+  attribute: 'lang',
+  value: 'zh',
+};
+const jaOptions: Partial<RehypeWrapCjkOptions> = {
+  attribute: 'lang',
+  value: 'ja',
+};
+const koOptions: Partial<RehypeWrapCjkOptions> = {
+  attribute: 'lang',
+  value: 'ko',
+};
 
 export function wrapChinese(input: string): string {
   return getProcessor(zhOptions).processSync(input).toString();
